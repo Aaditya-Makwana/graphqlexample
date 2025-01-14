@@ -29,9 +29,10 @@ public class AuthorService {
     }
 
     @GraphQLMutation(name = "createAuthor")
-    public Author createAuthor(@GraphQLArgument(name = "name") String name) {
+    public Author createAuthor(@GraphQLArgument(name = "id") Long id, @GraphQLArgument(name = "name") String name) {
         Author author = new Author();
         author.setName(name);
+        author.setId(id);
         return authorRepository.save(author);
     }
 

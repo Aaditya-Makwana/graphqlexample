@@ -1,23 +1,17 @@
 package com.aaditya.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
-@RedisHash("Book")
-public class Book implements Serializable {
+@Document(collection = "book")
+public class Book{
 
     @Id
     private Long id;
-
-    @Indexed
     private String title;
-
     private String publisher;
-
-    @Indexed
     private Long authorId;
 
     // Constructor
