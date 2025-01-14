@@ -6,19 +6,19 @@ import org.springframework.data.redis.core.index.Indexed;
 
 import java.io.Serializable;
 
-@RedisHash("Book")  // Stores this entity in Redis under the "Book" keyspace
+@RedisHash("Book")
 public class Book implements Serializable {
 
     @Id
     private Long id;
 
-    @Indexed  // Enables searching by title
+    @Indexed
     private String title;
 
     private String publisher;
 
-    @Indexed  // Enables searching by authorId
-    private Long authorId;  // Reference to the Author's ID instead of using @ManyToOne
+    @Indexed
+    private Long authorId;
 
     // Constructor
     public Book(String title, String publisher, Long authorId) {

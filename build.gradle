@@ -27,6 +27,11 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.graphql:spring-graphql-test'
 
+    // https://mvnrepository.com/artifact/io.leangen.graphql/graphql-spqr-spring-boot-starter
+    implementation 'io.leangen.graphql:graphql-spqr-spring-boot-starter:1.0.1'
+// https://mvnrepository.com/artifact/io.leangen.graphql/graphql-spqr-spring-boot-annotations
+    implementation 'io.leangen.graphql:graphql-spqr-spring-boot-annotations:1.0.1'
+
     // Runtime database (H2 in-memory for testing)
     runtimeOnly 'com.h2database:h2'
 }

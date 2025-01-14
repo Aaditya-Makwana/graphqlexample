@@ -20,13 +20,13 @@ public class GraphQLExampleApplication {
     @Bean
     ApplicationRunner applicationRunner(AuthorRepository authorRepository, BookRepository bookRepository){
         return args -> {
-            Author josh = authorRepository.save(new Author(null, "Josh Long"));
-            Author mark = authorRepository.save(new Author(null, "Mark Short"));
-            bookRepository.saveAll(List.of(
-                    new Book("Long", "LongPub", josh.getId()),
-                    new Book("Short", "ShortPub", mark.getId()),
-                    new Book("Spring boot", "JavaPub", josh.getId())
-            ));
+//            Author josh = authorRepository.save(new Author(null, "Josh Long"));
+//            Author mark = authorRepository.save(new Author(null, "Mark Short"));
+//            bookRepository.saveAll(List.of(
+//                    new Book("Long", "LongPub", josh.getId()),
+//                    new Book("Short", "ShortPub", mark.getId()),
+//                    new Book("Spring boot", "JavaPub", josh.getId())
+//            ));
         };
     }
 }
