@@ -3,7 +3,6 @@ package com.aaditya.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class Author {
         return bookIds;
     }
 
-    public void setBookIds(List<Long> bookIds) {
-        this.bookIds = bookIds;
+    public void addBookId(Long bookId) {
+        this.bookIds.add(bookId);
     }
 }

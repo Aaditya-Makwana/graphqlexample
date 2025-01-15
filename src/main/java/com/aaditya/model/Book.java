@@ -1,9 +1,8 @@
 package com.aaditya.model;
 
+import io.leangen.graphql.annotations.GraphQLArgument;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serializable;
 
 @Document(collection = "book")
 public class Book{
@@ -15,7 +14,8 @@ public class Book{
     private Long authorId;
 
     // Constructor
-    public Book(String title, String publisher, Long authorId) {
+    public Book(Long id, String title, String publisher, Long authorId) {
+        this.id = id;
         this.title = title;
         this.publisher = publisher;
         this.authorId = authorId;
