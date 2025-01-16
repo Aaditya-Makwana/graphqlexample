@@ -6,6 +6,7 @@ import com.aaditya.repository.AuthorRepository;
 import com.aaditya.repository.BookRepository;
 import io.leangen.graphql.annotations.*;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,21 +28,9 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    @GraphQLQuery(name = "authorById")
+    @GraphQLQuery(name = "getAuthorById")
     public Author getAuthorById(@GraphQLArgument Long id){
         return authorRepository.findById(id).orElse(null);
-    }
-
-//    @GraphQLQuery(name = "findByName")
-//    public Author findAuthorByName(@GraphQLArgument(name = "name") String name){
-//        return authorRepository.findByName(name);
-//    }
-
-    @GraphQLMutation(name = "addAuthor")
-    public Author createAuthor(@GraphQLArgument(name = "id") @GraphQLNonNull Long id,
-                               @GraphQLArgument(name = "name") @GraphQLNonNull String name) {
-        Author author = new Author(id, name);
-        return authorRepository.save(author);
     }
 
     @GraphQLQuery(name = "authorBooks")
@@ -49,10 +38,19 @@ public class AuthorService {
         return bookRepository.findAllById(author.getBookIds());
     }
 
-//    @GraphQLMutation(name = "deleteByName")
-//    public Author deleteAuthorByName(@GraphQLArgument(name = "name") String name){
-//        Author author = authorRepository.findByName(name);
-//        authorRepository.deleteById(author.getId());
-//        return author;
-//    }
+    @GraphQLMutation(name = "addAuthor")
+    public Author addAuthor(@GraphQLArgument(name = "id") @GraphQLNonNull Long id,
+                               @GraphQLArgument(name = "name") @GraphQLNonNull String name) {
+        return authorRepository.save(new Author(id, name));
+    }
+
+    @GraphQLMutation(name = "deleteAuthorById")
+    @Transactional
+    public void deleteAuthorById(@GraphQLArgument(name = "id") @GraphQLNonNull Long id){
+        Optional<Author> author = authorRepository.findById(id);
+        author.ifPresent(value -> value
+                .getBookIds()
+                .forEach(bookId -> bookRepository.deleteById(bookId)));
+        authorRepository.deleteById(id);
+    }
 }

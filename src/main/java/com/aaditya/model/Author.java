@@ -44,4 +44,8 @@ public class Author {
     public void addBookId(Long bookId) {
         this.bookIds.add(bookId);
     }
+
+    public void removeBookId(Long bookId){
+        this.bookIds.remove(bookId);
+    }
 }
